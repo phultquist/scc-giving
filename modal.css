@@ -110,6 +110,11 @@
     color: white
 }
 
+#checkout.clicked {
+    background-color: rgb(22, 78, 53) !important;
+    color: white !important;
+}
+
 .modal__btn:focus, .modal__btn:hover {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);

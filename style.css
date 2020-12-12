@@ -11,15 +11,57 @@
 .grid-container {
     display: grid;
     /* grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));; */
-    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.5fr;
-    grid-template-rows: 0.5fr 1.7fr 0.6fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    /* grid-template-rows: 0.5fr 1.7fr 0.6fr; */
     gap: 10px 30px;
-    grid-template-areas: ". . . . ." ". . . . ." ". . . . .";
+    /* grid-template-areas: ". . . . ." ". . . . ." ". . . . ."; */
     height: 100vh;
-    /* padding: 10px; */
-    background-image: url(assets/bg.jpg);
-    background-size: cover;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
+
+@media (max-width: 900px) and (min-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .header {
+        grid-column: 1/ span 2 !important;
+    }
+
+    .bottom-div {
+        grid-column: 1/ span 2 !important;
+    }
+
+    .full-wing-gift {
+        width: 80% !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        grid-column: 1/ span 1 !important;
+    }
+
+    .bottom-div {
+        grid-column: 1/ span 1 !important;
+    }
+
+    .full-wing-gift {
+        width: 80% !important;
+    }
+}
+
+
+/* @media (min-width: 900px) {
+    .grid-container { grid-template-columns: 1fr; }
+  } */
 
 html, body {
     height: 100%;
@@ -28,17 +70,23 @@ html, body {
     padding: 0px
 }
 
+body {
+    background-image: url(assets/bg.jpg);
+    background-size: cover;
+}
+
 .header {
-    grid-column: 1/ span 6;
+    grid-column: 1/ span 4;
     font-size: 55px;
     text-align: center;
     font-family: 'BAMBI', 'Roboto Slab', serif;
     color: #ffffff;
     margin: auto 0;
+    padding-top: 10px;
 }
 
 .bottom-div {
-    grid-column: 1/ span 6;
+    grid-column: 1/ span 4;
     align-items: center;
 }
 
@@ -54,7 +102,6 @@ html, body {
     width: 40%;
     padding: 10px;
     font-family: Arial, sans-serif;
-    
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 7px;
@@ -150,7 +197,7 @@ html, body {
     height: auto;
 }
 
-.bigboyblock button {
+.bigboyblock button, .bigboyblock a {
     display: block;
     margin: 0 auto;
     outline: none;
@@ -168,3 +215,7 @@ html, body {
 .bigboyblock button:hover {
     background-color: darkgray;
 }
+
+/* .spinning {
+    display: none;
+} */

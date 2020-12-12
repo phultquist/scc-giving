@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed&display=swap" rel="stylesheet">
 
@@ -25,12 +25,12 @@
     <div class="grid-container">
         <div class="header">SCC Holidaygrams</div>
 
-        <div class="item2">&nbsp;</div>
+        <!-- <div class="item2">&nbsp;</div> -->
         <div class="item3">
             <div class="storeitem">
                 <h3>Candy Basket</h3>
                 <img src="assets/1.png">
-                <p>$2</p>
+                <p>Candy Canes, Kisses, Ferrero Rocher | $2</p>
                 <button class="modalable-item" id="candy" title="Candy Basket">
                     GIFT
                 </button>
@@ -40,7 +40,7 @@
             <div class="storeitem">
                 <h3>Mmmm Basket</h3>
                 <img src="assets/2.png">
-                <p>$5</p>
+                <p>Candy, Hot Chocolate, Cookie Cutters, Popcorn, Chocolates | $5</p>
                 <button class="modalable-item" id="mmmm" title="Mmmm Basket">
                     GIFT
                 </button>
@@ -50,7 +50,7 @@
             <div class="storeitem">
                 <h3>Care Basket</h3>
                 <img src="assets/3.png">
-                <p>$15</p>
+                <p>Candle, Lotion, Bath Bomb, Face Mask | $15</p>
                 <button class="modalable-item" id="care" title="Care Basket">
                     GIFT
                 </button>
@@ -60,13 +60,13 @@
             <div class="storeitem">
                 <h3>Art Basket</h3>
                 <img src="assets/4.png">
-                <p>$15</p>
+                <p>Colored Pencils, Sketch Pad, Fine Tip Pens | $15</p>
                 <button class="modalable-item" id="art" title="Art Basket">
                     GIFT
                 </button>
             </div>
         </div>
-        <div class="item7">&nbsp;</div>
+        <!-- <div class="item7">&nbsp;</div> -->
         <div class="bottom-div">
             <div class="full-wing-gift modalable-item" id='wing' title="Wing Basket">Gift Something To An Entire Wing →
             </div>
@@ -106,7 +106,7 @@
                         <input type='hidden' name='redirect' id='redirect'>
                     </main>
                     <button type="submit" id="checkout">
-                        Continue →
+                        Continue <span class='arrow'>→</span> <i class="spinning fa fa-circle-o-notch fa-spin"></i>
                     </button>
                 </form>
 
@@ -127,9 +127,16 @@
                 $("#basket").val(basket);
                 MicroModal.show('modal-1');
             });
+            $(".spinning").hide();
+            $(".arrow").show();
+            $('#checkout').removeClass('clicked');
 
             $("#giftdata").submit(event => {
                 event.preventDefault();
+                $(".arrow").hide();
+                $(".spinning").show();
+                $('#checkout').addClass('clicked');
+
                 let basket = $("#basket").val();
                 let from = $("#from").val() || "Anonymous";
                 let to = $("#to").val() || "Random";
@@ -144,23 +151,27 @@
                     .then(function (response) {
                         return response.json();
                     })
-                    .then(function (session) {
-                        //TODO: send session id to server :)
-                        
+                    .then(function (session) {                        
                         // console.log(session);
-
+                        $(".spinning").hide();
+                        $(".arrow").show();
+                        $('#checkout').removeClass('clicked');
                         return stripe.redirectToCheckout({ sessionId: session.id });
                     })
                     .then(function (result) {
                         // If redirectToCheckout fails due to a browser or network
                         // error, you should display the localized error message to your
                         // customer using error.message.
+
                         if (result.error) {
                             alert(result.error.message);
                         }
                     })
                     .catch(function (error) {
                         console.error("Error:", error);
+                        $(".spinning").hide();
+                        $(".arrow").show();
+                        $('#checkout').removeClass('clicked');
                     });
             }
         })
